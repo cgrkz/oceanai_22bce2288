@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      target: backend
+    container_name: qa-agent-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_REGION=${AWS_REGION:-us-east-1}
+      - BEDROCK_LLM_MODEL_ID=amazon.nova-lite-v1:0
+      - BEDROCK_EMBEDDING_MODEL_ID=cohere.embed-v4:0
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./logs:/app/logs
+      - ./vector_store:/app/vector_store
+      - ./generated_tests:/app/generated_tests
+      - ./uploaded_files:/app/uploaded_files
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  frontend:
+    build:
+      context: .
+      target: frontend
+    container_name: qa-agent-frontend
+    ports:
+      - "8501:8501"
+    environment:
+      - API_BASE_URL=http://backend:8000
+      - AWS_REGION=${AWS_REGION:-us-east-1}
+    depends_on:
+      - backend
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  logs:
+  vector_store:
+  generated_tests:
+  uploaded_files:

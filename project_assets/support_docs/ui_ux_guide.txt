@@ -1,0 +1,504 @@
+================================================================================
+E-SHOP CHECKOUT - UI/UX DESIGN GUIDELINES
+================================================================================
+Version: 1.0
+Last Updated: November 2024
+Design System: E-Shop Material Design Extended
+================================================================================
+
+1. COLOR PALETTE
+================================================================================
+
+1.1 Primary Colors
+------------------
+- Primary Green: #4CAF50
+  Usage: Primary actions, success states, "Pay Now" button, cart buttons
+
+- Primary Green Hover: #45a049
+  Usage: Hover state for primary green elements
+
+1.2 Secondary Colors
+--------------------
+- Orange: #ff9800
+  Usage: Discount code button, promotional elements
+
+- Orange Hover: #e68900
+  Usage: Hover state for orange elements
+
+1.3 Status Colors
+-----------------
+- Success Green: #4CAF50
+  Usage: Success messages, valid discount codes, checkmarks
+
+- Error Red: #f44336
+  Usage: Error messages, validation errors, remove buttons, discount display
+
+- Warning Yellow Background: #fff3cd
+  Usage: Discount code section background
+
+1.4 Neutral Colors
+------------------
+- Background: #f5f5f5 (light gray)
+- Container Background: #ffffff (white)
+- Section Background: #f9f9f9 (very light gray)
+- Text Primary: #333333 (dark gray)
+- Text Secondary: #666666 (medium gray)
+- Text Disabled: #999999 (light gray)
+- Border Color: #dddddd (light border)
+- Border Secondary: #e0e0e0 (lighter border)
+- Hover Background: #f5f5f5
+
+================================================================================
+
+2. TYPOGRAPHY
+================================================================================
+
+2.1 Font Family
+---------------
+Primary Font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+Fallback: System default sans-serif
+
+2.2 Font Sizes and Weights
+---------------------------
+- H1 (Page Title): Default size, bold, color #333
+- H2 (Section Headings): Default size, color #444, 2px solid #4CAF50 bottom border
+- Product Name: 18px, bold, color #333
+- Product Price: 24px, bold, color #4CAF50
+- Cart Total: 24px, bold
+- Body Text: 14-16px, normal weight
+- Form Labels: 14px, medium weight (500), color #333
+- Error Messages: 13px, normal weight, color #f44336
+- Shipping/Payment Info: 14px, color #666
+
+================================================================================
+
+3. BUTTON DESIGN STANDARDS
+================================================================================
+
+3.1 Primary Action Button ("Pay Now")
+--------------------------------------
+CRITICAL REQUIREMENT: The "Pay Now" button MUST be GREEN
+- Background Color: #4CAF50 (green) - MANDATORY
+- Hover Color: #45a049 (darker green)
+- Text Color: white
+- Padding: 18px 40px
+- Font Size: 18px
+- Font Weight: bold
+- Border Radius: 5px
+- Width: 100% (full width)
+- Cursor: pointer
+- Disabled State: #cccccc background, not-allowed cursor
+
+3.2 Add to Cart Buttons
+------------------------
+- Background Color: #4CAF50 (green)
+- Hover Color: #45a049
+- Text Color: white
+- Padding: 12px 24px
+- Font Size: 16px
+- Border Radius: 5px
+- Width: 100% of product card
+- Transition: background-color 0.3s
+
+3.3 Discount Code Button
+-------------------------
+- Background Color: #ff9800 (orange)
+- Hover Color: #e68900
+- Text Color: white
+- Padding: 10px 20px
+- Border Radius: 4px
+
+3.4 Remove from Cart Button
+----------------------------
+- Background Color: #f44336 (red)
+- Hover Color: #da190b
+- Text Color: white
+- Padding: 8px 15px
+- Border Radius: 4px
+
+================================================================================
+
+4. FORM VALIDATION AND ERROR DISPLAY
+================================================================================
+
+4.1 Error Message Requirements
+-------------------------------
+CRITICAL REQUIREMENT: Form validation errors MUST be displayed in RED text
+- Color: #f44336 (red) - MANDATORY
+- Font Size: 13px
+- Position: Directly below the invalid field
+- Display: Initially hidden, shown on validation failure
+- Class: "error-message" with "show" class when visible
+
+4.2 Invalid Field Styling
+--------------------------
+- Border Color: #f44336 (red)
+- Border Width: 1px (same as normal)
+- Class: "error" added to input element
+
+4.3 Valid Field Styling
+------------------------
+- Border Color: #4CAF50 (green) on focus
+- Box Shadow: 0 0 5px rgba(76, 175, 80, 0.3) on focus
+
+4.4 Real-time Validation
+------------------------
+- Errors should disappear as user corrects the input
+- Validation feedback should be immediate
+- Error messages should be specific and helpful
+
+4.5 Required Field Indicators
+------------------------------
+- Required fields marked with asterisk (*) in label
+- Example: "Full Name *", "Email Address *", "Shipping Address *"
+
+================================================================================
+
+5. LAYOUT AND SPACING
+================================================================================
+
+5.1 Container
+-------------
+- Max Width: 1200px
+- Background: white
+- Padding: 30px
+- Border Radius: 10px
+- Box Shadow: 0 2px 10px rgba(0,0,0,0.1)
+- Centered on page
+
+5.2 Section Spacing
+-------------------
+- Section Top Margin: 30px
+- Section Bottom Margin: 15px
+- Section Heading Bottom Border: 2px solid #4CAF50
+- Section Heading Padding Bottom: 10px
+
+5.3 Form Elements
+-----------------
+- Form Group Margin Bottom: 20px
+- Label Margin Bottom: 8px
+- Input Padding: 12px
+- Input Border Radius: 5px
+- Radio Option Padding: 12px
+- Radio Option Border: 2px solid #ddd
+- Radio Option Border Radius: 5px
+- Radio Option Margin Bottom: 10px
+
+================================================================================
+
+6. PRODUCT CARD DESIGN
+================================================================================
+
+6.1 Card Structure
+------------------
+- Border: 1px solid #dddddd
+- Border Radius: 8px
+- Padding: 20px
+- Text Alignment: center
+- Hover Effect: translateY(-5px), box-shadow 0 4px 12px rgba(0,0,0,0.15)
+- Transition: transform 0.2s
+
+6.2 Product Image Placeholder
+------------------------------
+- Width: 100%
+- Height: 200px
+- Background: #e0e0e0
+- Border Radius: 5px
+- Display: centered emoji icon
+- Font Size: 48px
+
+6.3 Grid Layout
+---------------
+- Display: grid
+- Columns: repeat(auto-fit, minmax(250px, 1fr))
+- Gap: 20px
+
+================================================================================
+
+7. SHOPPING CART DESIGN
+================================================================================
+
+7.1 Cart Section
+----------------
+- Background: #f9f9f9
+- Padding: 20px
+- Border Radius: 8px
+
+7.2 Cart Item
+-------------
+- Display: flexbox, justify-content: space-between
+- Background: white
+- Padding: 15px
+- Border: 1px solid #e0e0e0
+- Border Radius: 5px
+- Margin Bottom: 10px
+
+7.3 Empty Cart State
+---------------------
+- Text Alignment: center
+- Color: #999999
+- Padding: 30px
+- Font Style: italic
+- Message: "Your cart is empty. Add some products!"
+
+7.4 Cart Total Display
+----------------------
+- Text Alignment: right
+- Font Size: 24px
+- Font Weight: bold
+- Border Top: 2px solid #dddddd
+- Padding Top: 20px
+- Margin Top: 20px
+
+================================================================================
+
+8. RADIO BUTTON GROUPS (Shipping & Payment)
+================================================================================
+
+8.1 Radio Option Design
+------------------------
+- Display: flex, align-items: center
+- Padding: 12px
+- Border: 2px solid #dddddd
+- Border Radius: 5px
+- Margin Bottom: 10px
+- Cursor: pointer
+- Transition: all 0.3s
+- Hover: background-color #f5f5f5
+
+8.2 Selected Radio Option
+--------------------------
+- Border Color: #4CAF50 (green)
+- Background Color: #e8f5e9 (light green)
+- Class: "selected"
+
+8.3 Radio Button Input
+-----------------------
+- Margin Right: 10px
+- Width: 20px
+- Height: 20px
+- Cursor: pointer
+
+8.4 Supporting Text
+-------------------
+- Font Size: 14px
+- Color: #666666
+- Margin Left: 30px
+
+================================================================================
+
+9. SUCCESS MESSAGE DESIGN
+================================================================================
+
+9.1 Payment Success Display
+----------------------------
+- Background Color: #d4edda (light green)
+- Text Color: #155724 (dark green)
+- Border: 2px solid #c3e6cb (green border)
+- Padding: 20px
+- Border Radius: 5px
+- Text Alignment: center
+- Font Size: 20px
+- Font Weight: bold
+- Display: Initially hidden, shown after successful payment
+- Message: "✅ Payment Successful! Thank you for your order."
+
+================================================================================
+
+10. DISCOUNT CODE SECTION
+================================================================================
+
+10.1 Section Design
+-------------------
+- Background: #fff3cd (light yellow)
+- Padding: 15px
+- Border Radius: 5px
+- Margin: 20px 0
+
+10.2 Discount Input
+-------------------
+- Padding: 10px
+- Border: 1px solid #dddddd
+- Border Radius: 4px
+- Margin Right: 10px
+- Width: 200px
+
+10.3 Success Message (Valid Code)
+----------------------------------
+- Color: #4CAF50 (green)
+- Font Weight: bold
+- Margin Top: 10px
+- Class: "discount-message success"
+
+10.4 Error Message (Invalid Code)
+----------------------------------
+- Color: #f44336 (red)
+- Font Weight: bold
+- Margin Top: 10px
+- Class: "discount-message error"
+
+================================================================================
+
+11. INTERACTIVE BEHAVIORS
+================================================================================
+
+11.1 Hover Effects
+------------------
+- All buttons: 0.3s background-color transition
+- Product cards: 0.2s transform and shadow transition
+- Radio options: 0.3s all properties transition
+
+11.2 Focus States
+-----------------
+- Form inputs: green border (#4CAF50) with subtle shadow
+- Remove default outline
+- Add custom focus styling for accessibility
+
+11.3 Disabled States
+--------------------
+- Pay Now button (disabled): #cccccc background, not-allowed cursor
+- Disabled condition: Form validation fails or cart is empty
+
+11.4 Loading States
+-------------------
+- Not implemented in current version
+- Future consideration: spinner or skeleton screens
+
+================================================================================
+
+12. RESPONSIVE DESIGN
+================================================================================
+
+12.1 Breakpoints
+----------------
+- Desktop: > 768px
+- Tablet: 768px - 481px
+- Mobile: < 480px
+
+12.2 Grid Behavior
+------------------
+- Products grid: auto-fit with minimum 250px columns
+- Adapts to screen size automatically
+
+12.3 Mobile Considerations
+--------------------------
+- Touch targets minimum 44px × 44px
+- Larger padding for mobile form inputs
+- Stack elements vertically on small screens
+- Full-width buttons for better usability
+
+================================================================================
+
+13. ACCESSIBILITY REQUIREMENTS
+================================================================================
+
+13.1 Color Contrast
+-------------------
+- All text meets WCAG AA standards (4.5:1 ratio for normal text)
+- Error messages have sufficient contrast with background
+- Form labels are clearly readable
+
+13.2 Focus Management
+---------------------
+- All interactive elements must be keyboard accessible
+- Focus states clearly visible
+- Logical tab order through form
+
+13.3 Labels and ARIA
+--------------------
+- All form inputs have associated labels
+- Error messages associated with inputs
+- Radio buttons properly grouped
+
+13.4 Error Identification
+-------------------------
+- Errors identified by color AND text
+- Error messages are descriptive
+- Multiple errors can be displayed simultaneously
+
+================================================================================
+
+14. ANIMATION AND TRANSITIONS
+================================================================================
+
+14.1 Standard Transitions
+--------------------------
+- Button hover: 0.3s background-color
+- Product card hover: 0.2s transform
+- Radio option: 0.3s all properties
+
+14.2 Smooth Scrolling
+---------------------
+- Success message scroll: smooth behavior
+- Auto-scroll to success message after payment
+
+14.3 Performance
+----------------
+- Use CSS transitions over JavaScript animations
+- Keep animations under 300ms for snappy feel
+- Avoid animating expensive properties (width, height)
+
+================================================================================
+
+15. ICON USAGE
+================================================================================
+
+15.1 Product Icons
+------------------
+- Laptop: 💻
+- Headphones: 🎧
+- Keyboard: ⌨️
+- Font Size: 48px
+
+15.2 Status Icons
+-----------------
+- Success: ✅ (checkmark)
+- Error: ✗ (X mark)
+- Valid Discount: ✓ (check)
+- Invalid Discount: ✗ (X mark)
+
+15.3 Page Title Icon
+---------------------
+- Shopping Cart: 🛒
+- Displayed in page title
+
+================================================================================
+
+16. TESTING CONSIDERATIONS FOR QA
+================================================================================
+
+16.1 Visual Testing Checkpoints
+--------------------------------
+- Verify "Pay Now" button is green (#4CAF50)
+- Verify error messages display in red (#f44336)
+- Verify discount section has yellow background (#fff3cd)
+- Verify selected radio options have green border
+- Verify success message has green background
+
+16.2 Responsive Testing
+-----------------------
+- Test layout at 320px, 768px, 1024px, and 1920px widths
+- Verify product grid adapts correctly
+- Verify all text remains readable
+- Verify buttons remain accessible
+
+16.3 Interaction Testing
+------------------------
+- Verify all hover states work correctly
+- Verify focus states are visible
+- Verify transitions are smooth
+- Verify disabled states prevent interaction
+
+================================================================================
+
+CRITICAL UI REQUIREMENTS SUMMARY:
+1. "Pay Now" button MUST be green (#4CAF50) - MANDATORY
+2. Form validation errors MUST be displayed in red text (#f44336) - MANDATORY
+3. Discount section MUST have yellow background (#fff3cd)
+4. Success messages MUST use green color scheme
+5. All interactive elements MUST have hover states
+6. All form inputs MUST have focus states
+
+================================================================================
+End of UI/UX Design Guidelines
+================================================================================

@@ -1,0 +1,586 @@
+{
+  "version": "1.0",
+  "description": "Test data for E-Shop Checkout - Valid and Invalid test cases",
+  "last_updated": "2024-11-21",
+
+  "valid_test_data": {
+    "customer_information": {
+      "names": [
+        "John Doe",
+        "Mary Jane Smith",
+        "José García",
+        "李明",
+        "Müller Schmidt",
+        "O'Brien",
+        "Jean-Pierre Dubois",
+        "Anna-Maria Johnson"
+      ],
+      "emails": [
+        "john.doe@example.com",
+        "user+tag@domain.co.uk",
+        "test_email@subdomain.example.com",
+        "name123@test.org",
+        "first.last@company.com",
+        "admin@localhost.local"
+      ],
+      "phones": [
+        "+1 (555) 123-4567",
+        "555-123-4567",
+        "+44 20 7123 4567",
+        "5551234567",
+        "+1-555-123-4567",
+        "(555) 123-4567",
+        "+91 98765 43210",
+        "001-555-1234"
+      ],
+      "addresses": [
+        "123 Main St, Apt 4B, New York, NY 10001",
+        "42 Wallaby Way, Sydney, NSW 2000, Australia",
+        "1600 Pennsylvania Avenue NW, Washington, DC 20500",
+        "221B Baker Street, London NW1 6XE, United Kingdom",
+        "Champs-Élysées, 75008 Paris, France",
+        "10 Downing Street, Westminster, London SW1A 2AA"
+      ]
+    },
+
+    "discount_codes": [
+      {"code": "SAVE15", "discount": 15, "case_variants": ["SAVE15", "save15", "Save15", "sAvE15"]},
+      {"code": "WELCOME10", "discount": 10, "case_variants": ["WELCOME10", "welcome10", "Welcome10"]},
+      {"code": "SUMMER20", "discount": 20, "case_variants": ["SUMMER20", "summer20", "Summer20"]}
+    ],
+
+    "shipping_methods": [
+      {
+        "id": "standard",
+        "name": "Standard Shipping",
+        "cost": 0.00,
+        "delivery_time": "5-7 business days"
+      },
+      {
+        "id": "express",
+        "name": "Express Shipping",
+        "cost": 10.00,
+        "delivery_time": "1-2 business days"
+      }
+    ],
+
+    "payment_methods": [
+      {
+        "id": "credit-card",
+        "name": "Credit Card",
+        "description": "Visa, MasterCard, American Express"
+      },
+      {
+        "id": "paypal",
+        "name": "PayPal",
+        "description": "Pay securely with your PayPal account"
+      }
+    ],
+
+    "products": [
+      {
+        "id": "PROD-001",
+        "name": "Premium Laptop",
+        "price": 999.99,
+        "element_id": "add-laptop"
+      },
+      {
+        "id": "PROD-002",
+        "name": "Wireless Headphones",
+        "price": 199.99,
+        "element_id": "add-headphones"
+      },
+      {
+        "id": "PROD-003",
+        "name": "Mechanical Keyboard",
+        "price": 149.99,
+        "element_id": "add-keyboard"
+      }
+    ]
+  },
+
+  "invalid_test_data": {
+    "names": [
+      {
+        "value": "",
+        "error": "Name is required",
+        "reason": "Empty string"
+      },
+      {
+        "value": "   ",
+        "error": "Name is required",
+        "reason": "Only whitespace"
+      },
+      {
+        "value": "J",
+        "error": "Name must be at least 2 characters",
+        "reason": "Too short"
+      },
+      {
+        "value": "John123",
+        "error": "Name should contain only letters and spaces",
+        "reason": "Contains numbers"
+      },
+      {
+        "value": "John@Doe",
+        "error": "Name should contain only letters and spaces",
+        "reason": "Contains special characters"
+      }
+    ],
+
+    "emails": [
+      {
+        "value": "",
+        "error": "Please enter a valid email address",
+        "reason": "Empty string"
+      },
+      {
+        "value": "notanemail",
+        "error": "Please enter a valid email address",
+        "reason": "Missing @ symbol"
+      },
+      {
+        "value": "@example.com",
+        "error": "Please enter a valid email address",
+        "reason": "Missing local part"
+      },
+      {
+        "value": "user@",
+        "error": "Please enter a valid email address",
+        "reason": "Missing domain"
+      },
+      {
+        "value": "user @example.com",
+        "error": "Please enter a valid email address",
+        "reason": "Contains space"
+      },
+      {
+        "value": "user@@example.com",
+        "error": "Please enter a valid email address",
+        "reason": "Multiple @ symbols"
+      },
+      {
+        "value": "user@domain",
+        "error": "Please enter a valid email address",
+        "reason": "Missing TLD"
+      }
+    ],
+
+    "phones": [
+      {
+        "value": "123",
+        "error": "Please enter a valid phone number",
+        "reason": "Too short"
+      },
+      {
+        "value": "abc-def-ghij",
+        "error": "Please enter a valid phone number",
+        "reason": "Contains letters"
+      },
+      {
+        "value": "555 123 4567 ext 890",
+        "error": "Please enter a valid phone number",
+        "reason": "Contains invalid text"
+      }
+    ],
+
+    "addresses": [
+      {
+        "value": "",
+        "error": "Address is required",
+        "reason": "Empty string"
+      },
+      {
+        "value": "   ",
+        "error": "Address is required",
+        "reason": "Only whitespace"
+      },
+      {
+        "value": "Main St",
+        "error": "Address must be at least 10 characters",
+        "reason": "Too short"
+      },
+      {
+        "value": "123",
+        "error": "Address must be at least 10 characters",
+        "reason": "Too short"
+      }
+    ],
+
+    "discount_codes": [
+      {
+        "value": "INVALID",
+        "error": "✗ Invalid discount code",
+        "reason": "Code does not exist"
+      },
+      {
+        "value": "EXPIRED",
+        "error": "✗ Invalid discount code",
+        "reason": "Expired code"
+      },
+      {
+        "value": "SAVE10",
+        "error": "✗ Invalid discount code",
+        "reason": "Wrong code"
+      },
+      {
+        "value": "123456",
+        "error": "✗ Invalid discount code",
+        "reason": "Random numbers"
+      },
+      {
+        "value": "",
+        "error": "✗ Invalid discount code",
+        "reason": "Empty code"
+      }
+    ]
+  },
+
+  "test_scenarios": {
+    "positive_scenarios": [
+      {
+        "scenario_id": "POS-001",
+        "description": "Complete checkout with single item, no discount, standard shipping",
+        "steps": [
+          "Add Premium Laptop to cart",
+          "Fill in valid customer information",
+          "Select Standard Shipping (default)",
+          "Select Credit Card (default)",
+          "Click Pay Now"
+        ],
+        "expected_result": "Payment successful message displayed",
+        "test_data": {
+          "products": ["Premium Laptop"],
+          "quantities": [1],
+          "discount_code": null,
+          "shipping": "standard",
+          "payment": "credit-card",
+          "expected_subtotal": 999.99,
+          "expected_shipping": 0.00,
+          "expected_total": 999.99
+        }
+      },
+      {
+        "scenario_id": "POS-002",
+        "description": "Complete checkout with multiple items and valid discount code",
+        "steps": [
+          "Add Premium Laptop to cart",
+          "Add Wireless Headphones to cart (quantity: 2)",
+          "Apply discount code SAVE15",
+          "Fill in valid customer information",
+          "Select Express Shipping",
+          "Select PayPal",
+          "Click Pay Now"
+        ],
+        "expected_result": "Payment successful with correct discounted total",
+        "test_data": {
+          "products": ["Premium Laptop", "Wireless Headphones"],
+          "quantities": [1, 2],
+          "discount_code": "SAVE15",
+          "shipping": "express",
+          "payment": "paypal",
+          "expected_subtotal": 1399.97,
+          "expected_discount": 209.99,
+          "expected_shipping": 10.00,
+          "expected_total": 1199.98
+        }
+      },
+      {
+        "scenario_id": "POS-003",
+        "description": "Apply discount code with case insensitivity",
+        "steps": [
+          "Add any product to cart",
+          "Enter discount code 'save15' (lowercase)",
+          "Click Apply Code"
+        ],
+        "expected_result": "Discount applied successfully",
+        "test_data": {
+          "discount_code_variants": ["SAVE15", "save15", "Save15", "sAvE15"],
+          "expected_discount_percentage": 15
+        }
+      },
+      {
+        "scenario_id": "POS-004",
+        "description": "Modify cart quantities and verify price updates",
+        "steps": [
+          "Add Wireless Headphones to cart",
+          "Change quantity to 3",
+          "Verify item total updates",
+          "Verify cart total updates"
+        ],
+        "expected_result": "All prices update correctly in real-time",
+        "test_data": {
+          "product": "Wireless Headphones",
+          "initial_quantity": 1,
+          "updated_quantity": 3,
+          "expected_item_total": 599.97
+        }
+      },
+      {
+        "scenario_id": "POS-005",
+        "description": "Remove item from cart",
+        "steps": [
+          "Add Premium Laptop to cart",
+          "Add Wireless Headphones to cart",
+          "Click Remove on Wireless Headphones",
+          "Verify only Laptop remains in cart"
+        ],
+        "expected_result": "Item removed, cart total updated",
+        "test_data": {
+          "initial_items": 2,
+          "removed_item": "Wireless Headphones",
+          "remaining_items": 1
+        }
+      }
+    ],
+
+    "negative_scenarios": [
+      {
+        "scenario_id": "NEG-001",
+        "description": "Attempt checkout with empty cart",
+        "steps": [
+          "Ensure cart is empty",
+          "Fill in valid customer information",
+          "Click Pay Now"
+        ],
+        "expected_result": "Alert: 'Your cart is empty! Please add items before checking out.'",
+        "test_data": {
+          "cart_items": 0,
+          "form_valid": true
+        }
+      },
+      {
+        "scenario_id": "NEG-002",
+        "description": "Submit form with empty required fields",
+        "steps": [
+          "Add item to cart",
+          "Leave name field empty",
+          "Leave email field empty",
+          "Leave address field empty",
+          "Click Pay Now"
+        ],
+        "expected_result": "All three error messages displayed, form not submitted",
+        "test_data": {
+          "name": "",
+          "email": "",
+          "address": "",
+          "expected_errors": ["Name is required", "Please enter a valid email address", "Address is required"]
+        }
+      },
+      {
+        "scenario_id": "NEG-003",
+        "description": "Submit form with invalid email",
+        "steps": [
+          "Add item to cart",
+          "Enter valid name",
+          "Enter invalid email (e.g., 'notanemail')",
+          "Enter valid address",
+          "Click Pay Now"
+        ],
+        "expected_result": "Email error displayed, form not submitted",
+        "test_data": {
+          "name": "John Doe",
+          "email": "notanemail",
+          "address": "123 Main St, New York, NY 10001",
+          "expected_error": "Please enter a valid email address"
+        }
+      },
+      {
+        "scenario_id": "NEG-004",
+        "description": "Apply invalid discount code",
+        "steps": [
+          "Add item to cart",
+          "Enter invalid discount code (e.g., 'INVALID')",
+          "Click Apply Code"
+        ],
+        "expected_result": "Error message: '✗ Invalid discount code'",
+        "test_data": {
+          "discount_code": "INVALID",
+          "expected_message": "✗ Invalid discount code",
+          "discount_applied": false
+        }
+      },
+      {
+        "scenario_id": "NEG-005",
+        "description": "Enter address that is too short",
+        "steps": [
+          "Add item to cart",
+          "Enter valid name and email",
+          "Enter address with less than 10 characters (e.g., 'Main St')",
+          "Click Pay Now"
+        ],
+        "expected_result": "Address error displayed",
+        "test_data": {
+          "address": "Main St",
+          "expected_error": "Address is required"
+        }
+      }
+    ],
+
+    "edge_case_scenarios": [
+      {
+        "scenario_id": "EDGE-001",
+        "description": "Change shipping method after discount applied",
+        "steps": [
+          "Add item to cart",
+          "Apply discount code SAVE15",
+          "Verify discount applied to subtotal",
+          "Change from Standard to Express shipping",
+          "Verify shipping cost added but discount unchanged"
+        ],
+        "expected_result": "Discount remains on subtotal, shipping added separately",
+        "test_data": {
+          "subtotal": 999.99,
+          "discount_percentage": 15,
+          "discount_amount": 149.99,
+          "standard_shipping": 0.00,
+          "express_shipping": 10.00,
+          "total_with_standard": 850.00,
+          "total_with_express": 860.00
+        }
+      },
+      {
+        "scenario_id": "EDGE-002",
+        "description": "Add items after discount code applied",
+        "steps": [
+          "Add Premium Laptop to cart ($999.99)",
+          "Apply discount code SAVE15",
+          "Verify discount amount ($150.00)",
+          "Add Wireless Headphones to cart ($199.99)",
+          "Verify discount recalculated on new subtotal"
+        ],
+        "expected_result": "Discount percentage stays 15%, but amount increases",
+        "test_data": {
+          "initial_subtotal": 999.99,
+          "initial_discount": 150.00,
+          "new_subtotal": 1199.98,
+          "new_discount": 180.00
+        }
+      },
+      {
+        "scenario_id": "EDGE-003",
+        "description": "Real-time validation on form fields",
+        "steps": [
+          "Enter invalid email",
+          "Click Pay Now (error appears)",
+          "Start typing correct email",
+          "Verify error disappears while typing"
+        ],
+        "expected_result": "Error clears as user corrects the field",
+        "test_data": {
+          "initial_value": "notanemail",
+          "corrected_value": "user@example.com",
+          "error_clears": true
+        }
+      },
+      {
+        "scenario_id": "EDGE-004",
+        "description": "Multiple discount code attempts",
+        "steps": [
+          "Apply valid code SAVE15",
+          "Verify discount applied",
+          "Apply another valid code SUMMER20",
+          "Verify new discount replaces old one"
+        ],
+        "expected_result": "Only one discount active (latest valid code)",
+        "test_data": {
+          "first_code": "SAVE15",
+          "first_discount": 15,
+          "second_code": "SUMMER20",
+          "second_discount": 20,
+          "active_discount": 20
+        }
+      },
+      {
+        "scenario_id": "EDGE-005",
+        "description": "Very large quantity in cart",
+        "steps": [
+          "Add Wireless Headphones to cart",
+          "Change quantity to 100",
+          "Verify calculations correct"
+        ],
+        "expected_result": "Cart handles large quantities correctly",
+        "test_data": {
+          "product_price": 199.99,
+          "quantity": 100,
+          "expected_subtotal": 19999.00
+        }
+      }
+    ]
+  },
+
+  "selenium_test_selectors": {
+    "products": {
+      "laptop_add_button": "#add-laptop",
+      "headphones_add_button": "#add-headphones",
+      "keyboard_add_button": "#add-keyboard"
+    },
+    "cart": {
+      "cart_items_container": "#cart-items",
+      "empty_cart_message": ".cart-empty",
+      "quantity_inputs": ".quantity-input",
+      "remove_buttons": ".remove-btn",
+      "subtotal": "#subtotal",
+      "discount_display": "#discount-display",
+      "discount_percentage": "#discount-percentage",
+      "discount_amount": "#discount-amount",
+      "shipping_cost": "#shipping-cost",
+      "total_price": "#total-price"
+    },
+    "discount": {
+      "discount_code_input": "#discount-code",
+      "apply_discount_button": "#apply-discount",
+      "discount_message": "#discount-message"
+    },
+    "form": {
+      "name_input": "#name",
+      "name_error": "#name-error",
+      "email_input": "#email",
+      "email_error": "#email-error",
+      "phone_input": "#phone",
+      "phone_error": "#phone-error",
+      "address_input": "#address",
+      "address_error": "#address-error"
+    },
+    "shipping": {
+      "standard_radio": "#standard-shipping",
+      "express_radio": "#express-shipping",
+      "standard_option_container": "#standard-shipping-option",
+      "express_option_container": "#express-shipping-option"
+    },
+    "payment": {
+      "credit_card_radio": "#credit-card",
+      "paypal_radio": "#paypal",
+      "credit_card_option_container": "#credit-card-option",
+      "paypal_option_container": "#paypal-option"
+    },
+    "submission": {
+      "checkout_form": "#checkout-form",
+      "pay_now_button": "#pay-now",
+      "success_message": "#success-message"
+    }
+  },
+
+  "expected_behaviors": {
+    "button_colors": {
+      "pay_now_button_normal": "#4CAF50",
+      "pay_now_button_hover": "#45a049",
+      "add_to_cart_normal": "#4CAF50",
+      "discount_button": "#ff9800",
+      "remove_button": "#f44336"
+    },
+    "error_colors": {
+      "error_text": "#f44336",
+      "error_border": "#f44336"
+    },
+    "success_colors": {
+      "success_background": "#d4edda",
+      "success_text": "#155724"
+    },
+    "validation_timing": {
+      "real_time_clear": "Error clears as user types",
+      "submit_validation": "All errors shown on submit",
+      "calculation_update": "Instant (< 100ms)"
+    }
+  }
+}

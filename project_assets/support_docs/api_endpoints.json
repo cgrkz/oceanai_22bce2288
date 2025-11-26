@@ -1,0 +1,541 @@
+{
+  "api_version": "1.0",
+  "base_url": "https://api.eshop.example.com/v1",
+  "description": "E-Shop Checkout API Endpoints (Mock Specification for Frontend Testing)",
+  "note": "Current implementation is client-side only. These endpoints represent the future backend API structure.",
+
+  "endpoints": {
+    "products": {
+      "get_products": {
+        "method": "GET",
+        "path": "/products",
+        "description": "Retrieve list of all available products",
+        "authentication": "Not required",
+        "request": {
+          "parameters": {},
+          "headers": {
+            "Accept": "application/json"
+          }
+        },
+        "response": {
+          "status_code": 200,
+          "content_type": "application/json",
+          "body_schema": {
+            "products": [
+              {
+                "product_id": "string",
+                "name": "string",
+                "price": "number",
+                "category": "string",
+                "in_stock": "boolean",
+                "description": "string"
+              }
+            ]
+          },
+          "example": {
+            "products": [
+              {
+                "product_id": "PROD-001",
+                "name": "Premium Laptop",
+                "price": 999.99,
+                "category": "Electronics",
+                "in_stock": true,
+                "description": "High-performance laptop for professionals"
+              },
+              {
+                "product_id": "PROD-002",
+                "name": "Wireless Headphones",
+                "price": 199.99,
+                "category": "Audio",
+                "in_stock": true,
+                "description": "Noise-cancelling wireless headphones"
+              },
+              {
+                "product_id": "PROD-003",
+                "name": "Mechanical Keyboard",
+                "price": 149.99,
+                "category": "Peripherals",
+                "in_stock": true,
+                "description": "RGB mechanical gaming keyboard"
+              }
+            ]
+          }
+        }
+      },
+
+      "get_product_by_id": {
+        "method": "GET",
+        "path": "/products/{product_id}",
+        "description": "Retrieve specific product details by ID",
+        "authentication": "Not required",
+        "request": {
+          "path_parameters": {
+            "product_id": "string (required)"
+          },
+          "headers": {
+            "Accept": "application/json"
+          }
+        },
+        "response": {
+          "status_code": 200,
+          "content_type": "application/json",
+          "body_schema": {
+            "product_id": "string",
+            "name": "string",
+            "price": "number",
+            "category": "string",
+            "in_stock": "boolean",
+            "description": "string"
+          }
+        },
+        "error_responses": {
+          "404": {
+            "description": "Product not found",
+            "body": {
+              "error": "Product not found",
+              "product_id": "string"
+            }
+          }
+        }
+      }
+    },
+
+    "cart": {
+      "add_to_cart": {
+        "method": "POST",
+        "path": "/cart/add",
+        "description": "Add a product to the shopping cart",
+        "authentication": "Session-based",
+        "request": {
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          "body_schema": {
+            "product_id": "string (required)",
+            "quantity": "integer (required, min: 1)"
+          },
+          "example": {
+            "product_id": "PROD-001",
+            "quantity": 1
+          }
+        },
+        "response": {
+          "status_code": 200,
+          "content_type": "application/json",
+          "body_schema": {
+            "success": "boolean",
+            "message": "string",
+            "cart": "object"
+          },
+          "example": {
+            "success": true,
+            "message": "Product added to cart successfully",
+            "cart": {
+              "items": [
+                {
+                  "product_id": "PROD-001",
+                  "name": "Premium Laptop",
+                  "price": 999.99,
+                  "quantity": 1,
+                  "subtotal": 999.99
+                }
+              ],
+              "total_items": 1,
+              "subtotal": 999.99
+            }
+          }
+        },
+        "error_responses": {
+          "400": {
+            "description": "Invalid request data",
+            "body": {
+              "error": "Invalid quantity or product_id"
+            }
+          },
+          "404": {
+            "description": "Product not found",
+            "body": {
+              "error": "Product not found"
+            }
+          }
+        }
+      },
+
+      "update_cart_item": {
+        "method": "PUT",
+        "path": "/cart/update",
+        "description": "Update quantity of an item in cart",
+        "authentication": "Session-based",
+        "request": {
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "body_schema": {
+            "product_id": "string (required)",
+            "quantity": "integer (required, min: 1)"
+          }
+        },
+        "response": {
+          "status_code": 200,
+          "body_schema": {
+            "success": "boolean",
+            "message": "string",
+            "cart": "object"
+          }
+        }
+      },
+
+      "remove_from_cart": {
+        "method": "DELETE",
+        "path": "/cart/remove",
+        "description": "Remove an item from the cart",
+        "authentication": "Session-based",
+        "request": {
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "body_schema": {
+            "product_id": "string (required)"
+          }
+        },
+        "response": {
+          "status_code": 200,
+          "body_schema": {
+            "success": "boolean",
+            "message": "string",
+            "cart": "object"
+          }
+        }
+      },
+
+      "get_cart": {
+        "method": "GET",
+        "path": "/cart",
+        "description": "Retrieve current cart contents",
+        "authentication": "Session-based",
+        "response": {
+          "status_code": 200,
+          "body_schema": {
+            "items": "array",
+            "total_items": "integer",
+            "subtotal": "number",
+            "discount": "object|null",
+            "shipping": "object|null",
+            "total": "number"
+          }
+        }
+      }
+    },
+
+    "discount": {
+      "apply_coupon": {
+        "method": "POST",
+        "path": "/discount/apply",
+        "description": "Apply a discount code to the cart",
+        "authentication": "Session-based",
+        "request": {
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          "body_schema": {
+            "code": "string (required)"
+          },
+          "example": {
+            "code": "SAVE15"
+          }
+        },
+        "response": {
+          "status_code": 200,
+          "content_type": "application/json",
+          "body_schema": {
+            "success": "boolean",
+            "message": "string",
+            "discount": "object"
+          },
+          "example": {
+            "success": true,
+            "message": "Discount code applied successfully",
+            "discount": {
+              "code": "SAVE15",
+              "percentage": 15,
+              "amount": 149.99,
+              "description": "15% off entire order"
+            }
+          }
+        },
+        "error_responses": {
+          "400": {
+            "description": "Invalid or expired discount code",
+            "body": {
+              "success": false,
+              "error": "Invalid discount code",
+              "message": "The provided discount code is not valid or has expired"
+            }
+          }
+        },
+        "validation_rules": {
+          "code_format": "Alphanumeric, case-insensitive",
+          "valid_codes": ["SAVE15", "WELCOME10", "SUMMER20"],
+          "discount_values": {
+            "SAVE15": "15% off",
+            "WELCOME10": "10% off",
+            "SUMMER20": "20% off"
+          }
+        }
+      },
+
+      "remove_coupon": {
+        "method": "DELETE",
+        "path": "/discount/remove",
+        "description": "Remove applied discount code from cart",
+        "authentication": "Session-based",
+        "response": {
+          "status_code": 200,
+          "body_schema": {
+            "success": "boolean",
+            "message": "string"
+          }
+        }
+      },
+
+      "validate_coupon": {
+        "method": "POST",
+        "path": "/discount/validate",
+        "description": "Validate a discount code without applying it",
+        "authentication": "Not required",
+        "request": {
+          "body_schema": {
+            "code": "string (required)"
+          }
+        },
+        "response": {
+          "status_code": 200,
+          "body_schema": {
+            "valid": "boolean",
+            "code": "string",
+            "percentage": "number|null",
+            "message": "string"
+          }
+        }
+      }
+    },
+
+    "order": {
+      "submit_order": {
+        "method": "POST",
+        "path": "/order/submit",
+        "description": "Submit order for processing and payment",
+        "authentication": "Session-based",
+        "request": {
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          "body_schema": {
+            "customer": {
+              "name": "string (required, min: 2 chars)",
+              "email": "string (required, valid email format)",
+              "phone": "string (optional)",
+              "address": "string (required, min: 10 chars)"
+            },
+            "shipping_method": "string (required, enum: [standard, express])",
+            "payment_method": "string (required, enum: [credit-card, paypal])"
+          },
+          "example": {
+            "customer": {
+              "name": "John Doe",
+              "email": "john.doe@example.com",
+              "phone": "+1 (555) 123-4567",
+              "address": "123 Main St, Apt 4B, New York, NY 10001"
+            },
+            "shipping_method": "express",
+            "payment_method": "credit-card"
+          }
+        },
+        "response": {
+          "status_code": 200,
+          "content_type": "application/json",
+          "body_schema": {
+            "success": "boolean",
+            "message": "string",
+            "order_id": "string",
+            "order_total": "number",
+            "estimated_delivery": "string"
+          },
+          "example": {
+            "success": true,
+            "message": "Payment Successful! Thank you for your order.",
+            "order_id": "ORD-20241121-001",
+            "order_total": 1159.99,
+            "estimated_delivery": "2024-11-23"
+          }
+        },
+        "error_responses": {
+          "400": {
+            "description": "Validation error or empty cart",
+            "body": {
+              "success": false,
+              "error": "Validation failed",
+              "details": {
+                "email": "Invalid email format",
+                "address": "Address is required"
+              }
+            }
+          },
+          "422": {
+            "description": "Payment processing failed",
+            "body": {
+              "success": false,
+              "error": "Payment declined",
+              "message": "Your payment could not be processed"
+            }
+          }
+        },
+        "validation_rules": {
+          "name": {
+            "required": true,
+            "min_length": 2,
+            "max_length": 100,
+            "pattern": "^[a-zA-Z\\s]+$"
+          },
+          "email": {
+            "required": true,
+            "format": "email",
+            "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$"
+          },
+          "phone": {
+            "required": false,
+            "format": "phone",
+            "pattern": "^[+]?[0-9\\s\\-\\(\\)]+$"
+          },
+          "address": {
+            "required": true,
+            "min_length": 10,
+            "max_length": 500
+          },
+          "shipping_method": {
+            "required": true,
+            "enum": ["standard", "express"]
+          },
+          "payment_method": {
+            "required": true,
+            "enum": ["credit-card", "paypal"]
+          }
+        }
+      },
+
+      "get_order_status": {
+        "method": "GET",
+        "path": "/order/{order_id}/status",
+        "description": "Get order status and tracking information",
+        "authentication": "Required",
+        "request": {
+          "path_parameters": {
+            "order_id": "string (required)"
+          }
+        },
+        "response": {
+          "status_code": 200,
+          "body_schema": {
+            "order_id": "string",
+            "status": "string",
+            "tracking_number": "string|null",
+            "estimated_delivery": "string"
+          }
+        }
+      }
+    },
+
+    "shipping": {
+      "get_shipping_methods": {
+        "method": "GET",
+        "path": "/shipping/methods",
+        "description": "Get available shipping methods and costs",
+        "authentication": "Not required",
+        "response": {
+          "status_code": 200,
+          "content_type": "application/json",
+          "body_schema": {
+            "methods": [
+              {
+                "id": "string",
+                "name": "string",
+                "cost": "number",
+                "delivery_time": "string",
+                "description": "string"
+              }
+            ]
+          },
+          "example": {
+            "methods": [
+              {
+                "id": "standard",
+                "name": "Standard Shipping",
+                "cost": 0.00,
+                "delivery_time": "5-7 business days",
+                "description": "Free standard shipping"
+              },
+              {
+                "id": "express",
+                "name": "Express Shipping",
+                "cost": 10.00,
+                "delivery_time": "1-2 business days",
+                "description": "Fast express delivery"
+              }
+            ]
+          }
+        }
+      },
+
+      "calculate_shipping": {
+        "method": "POST",
+        "path": "/shipping/calculate",
+        "description": "Calculate shipping cost based on cart and method",
+        "authentication": "Session-based",
+        "request": {
+          "body_schema": {
+            "shipping_method": "string (required)",
+            "destination": "object (optional)"
+          }
+        },
+        "response": {
+          "status_code": 200,
+          "body_schema": {
+            "shipping_cost": "number",
+            "method": "string",
+            "estimated_delivery": "string"
+          }
+        }
+      }
+    }
+  },
+
+  "error_codes": {
+    "400": "Bad Request - Invalid input data",
+    "401": "Unauthorized - Authentication required",
+    "403": "Forbidden - Insufficient permissions",
+    "404": "Not Found - Resource does not exist",
+    "422": "Unprocessable Entity - Validation failed",
+    "500": "Internal Server Error - Server-side error"
+  },
+
+  "rate_limiting": {
+    "requests_per_minute": 60,
+    "burst_limit": 100,
+    "retry_after_header": "Retry-After"
+  },
+
+  "authentication": {
+    "type": "Session-based cookies",
+    "session_duration": "24 hours",
+    "note": "Current frontend implementation does not use authentication"
+  },
+
+  "testing_notes": {
+    "mock_mode": "All endpoints are currently mocked in the frontend",
+    "future_integration": "These endpoints define the contract for future backend integration",
+    "test_data": "Use test_data.json for sample valid and invalid inputs"
+  }
+}
